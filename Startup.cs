@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Azure.Storage.Blobs;
+using OptionMV.Interfaces;
+using OptionMV.Services;
 
 namespace OptionMV
 {
@@ -23,6 +26,8 @@ namespace OptionMV
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton(x => new BlobServiceClient(Configuration.GetValue<string>("AzureBlobStorageConnectionString")));
+            services.AddSingleton<IBlobService,BlobService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
