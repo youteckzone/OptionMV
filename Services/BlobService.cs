@@ -24,9 +24,15 @@ namespace OptionMV.Services
             return new BlobInfo(blobDownloadInfo.Value.Content, blobDownloadInfo.Value.ContentType) ;
         }
 
-        public Task<IEnumerable<string>> ListBlobAsync()
+        public async Task<IEnumerable<string>> ListBlobAsync()
         {
-            throw new System.NotImplementedException();
+            var containerClient = _blobServiceClient.GetBlobContainerClient("youtube");
+            var items = new List<string>();
+            await foreach(var blobItem in containerClient.GetBlobsAsync())
+            {
+                items.Add(blobItem.Name);
+            }
+            return items;
         }
 
         public Task UploadFileBlobAsync(string filePath, string fileName)

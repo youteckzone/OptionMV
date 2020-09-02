@@ -39,6 +39,15 @@ namespace OptionMV.Controllers
             // return View();
         }
 
+        public async Task<IActionResult> ProductHub()
+        {
+            var blobs = await _blobService.ListBlobAsync();
+            System.Text.Json.JsonSerializerOptions jsonOpt = new System.Text.Json.JsonSerializerOptions();
+            jsonOpt.WriteIndented = true;
+            jsonOpt.AllowTrailingCommas = true;
+
+            return new JsonResult(blobs,jsonOpt);
+        }
 
         [HttpGet("blobName")]
         public async Task<IActionResult> GetBlobInfo(string blobName)
