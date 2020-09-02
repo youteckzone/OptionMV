@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'optionmv'
         slot-name: 'dev'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_38703850536b4374ad2223b42d0be3de }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_477bf8c78555405782f30cad5c087710 }}
         package: ${{env.DOTNET_ROOT}}/myapp 
